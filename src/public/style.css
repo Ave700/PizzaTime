@@ -1,0 +1,34 @@
+:root{
+    --ourBlack: rgb(39, 37, 31);
+    --googleBlue: rgb(66,133,244);
+    --googleYellow: rgb(244,160,0);
+}
+html{
+    margin: 0 auto;
+    font-size: 26px;
+    color: var(--ourBlack);
+
+}
+body{
+    margin: 0 auto;
+    margin-bottom: 2em;
+}
+h1{
+    color: white;
+    background-color: var(--ourBlack);
+    margin: 0 auto;
+}
+.content{
+    font-size: 24px;
+}
+footer{
+    color: white;
+    font-size: 20px;
+    position: fixed;
+    height: 2em;
+    background-color: var(--ourBlack);
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    margin-bottom: 0px;
+}
