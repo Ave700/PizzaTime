@@ -14,22 +14,27 @@ HOME PAGE
   - navigate to other webpages in this website
   - iii
   - iii
+  
 RESTAURANT PAGE
   - click on a particular restaurant to go to the reviews page
   - iii
   - iii
+  
 REVIEWS PAGE
   - iii
   - iii
   - iii
+  
 CATALOG PAGE
   - iii
   - iii
   - iii
+  
 LOCATIONS PAGE
   - iii
   - iii
   - iii
+  
 LOG-IN PAGE
   - Can sign up or log in to an account on the app
   - iii
