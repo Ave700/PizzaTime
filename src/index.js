@@ -1,6 +1,6 @@
 /**
  * Node.js Web Application Template
- * 
+ *
  * The code below serves as a starting point for anyone wanting to build a
  * website using Node.js, Express, Handlebars, and MySQL. You can also use
  * Forever to run your service as a background process.
@@ -47,16 +47,31 @@ function connectDb(req, res, next) {
  */
 app.get('/', connectDb, function(req, res) {
   console.log('Got request for the home page');
-
   res.render('home');
 
   close(req);
 });
 
+app.get('/restaurants.html', connectDb, function(req, res) {
+  req.db.query('SELECT * from Restaurant', function (err, results) {
+    if (err) throw err;
+    restaurants = []
+    for(let i = 0; i < results.length; i++) {
+      restaurants.push(results[i])
+    }
+    let wrapper = {objects: restaurants}
+    console.log(wrapper)
+    res.render('restaurant', {wrapper});
+  });
+
+
+  close(req);
+});
+
 /**
- * Handle all of the resources we need to clean up. In this case, we just need 
+ * Handle all of the resources we need to clean up. In this case, we just need
  * to close the database connection.
- * 
+ *
  * @param {Express.Request} req the request object passed to our middleware
  */
 function close(req) {

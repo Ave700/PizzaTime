@@ -1,0 +1,17 @@
+
+<h1>Pizza Time</h1>
+<p>Welcome to Pizza Time! A helpful app to find the pizza near you!</p>
+<div class="content" id="main">
+  <div class="restaurants">
+    {{#with wrapper}}
+        {{#each objects}}
+          <h2 id="Rname">{{rest_name}}</h2>
+          <p id="Address">{{Address}}</p>
+          <p id="phone#">{{PhoneNumber}}</p>
+          <p id="zipcode">{{Zipcode}}</p>
+        {{/each}}
+
+    {{/with}}
+  </div>
+</div>
+<footer>Created for CS340 class</footer>
