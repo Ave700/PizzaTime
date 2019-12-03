@@ -52,15 +52,10 @@ app.get('/', connectDb, function(req, res) {
   close(req);
 });
 
-app.get('/restaurants.html', connectDb, function(req, res) {
+app.get('/restaurants', connectDb, function(req, res) {
   req.db.query('SELECT * from Restaurant', function (err, results) {
     if (err) throw err;
-    restaurants = []
-    for(let i = 0; i < results.length; i++) {
-      restaurants.push(results[i])
-    }
-    let wrapper = {objects: restaurants}
-    console.log(wrapper)
+    let wrapper = {objects: results}
     res.render('restaurant', {wrapper});
   });
 
