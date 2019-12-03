@@ -61,3 +61,11 @@ footer{
   float: right;
   color: red;
 }
+
+img {
+ float: right;
+}
+
+.flex-container {
+  display: flex;
+}
