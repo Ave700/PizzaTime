@@ -63,6 +63,11 @@ app.get('/restaurants', connectDb, function(req, res) {
   close(req);
 });
 
+app.get('/images/:image_name', function(req, res, next) {
+  let image_name = req.params.image_name;
+  res.render(path.join('public/images/', image_name));
+});
+
 /**
  * Handle all of the resources we need to clean up. In this case, we just need
  * to close the database connection.
