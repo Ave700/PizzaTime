@@ -1,6 +1,6 @@
 /**
  * Node.js Web Application Template
- * 
+ *
  * The code below serves as a starting point for anyone wanting to build a
  * website using Node.js, Express, Handlebars, and MySQL. You can also use
  * Forever to run your service as a background process.
@@ -47,16 +47,64 @@ function connectDb(req, res, next) {
  */
 app.get('/', connectDb, function(req, res) {
   console.log('Got request for the home page');
-
   res.render('home');
 
   close(req);
 });
 
+app.get('/restaurants', connectDb, function(req, res) {
+  req.db.query('SELECT * from Restaurant', function (err, results) {
+    if (err) throw err;
+    let wrapper = {objects: results}
+    res.render('restaurant', {wrapper});
+  });
+  close(req);
+});
+
+app.get('/catalog', connectDb, function(req, res) {
+   var result = []
+  req.db.query('SELECT * from Toppings', function (err, results) {
+    if (err) throw errl
+    result.push(results)
+   // console.log(result)
+    //let wrapper = [[Toppings: results], [Restaurant: results], [Pizzas: results]]
+    //res.render('catalog', {wrapper});
+    req.db.query('SELECT * from Restaurant', function (err, results) {
+      if (err) throw errl
+      result.push(results)
+      //let wrapper = [[Toppings: results], [Restaurant: results], [Pizzas: results]]
+      //res.render('catalog', {wrapper});
+      req.db.query('SELECT * from Pizzas', function (err, results) {
+        if (err) throw errl
+        result.push(results)
+        console.log(result)
+        //let wrapper = [[Toppings: results], [Restaurant: results], [Pizzas: results]]
+        //res.render('catalog', {wrapper});
+        res.render("catalog", {wrapper: result})
+        close(req);
+      });
+    });
+  });
+  
+  
+  console.log(result)
+  
+  //console.log(result)
+  
+  /*
+  req.db.query('SELECT * from Restaurant', function (err, results) {
+    if (err) throw errl
+    let wrapper = {restaurant: results}
+    res.render('catalog', {wrapper});
+  });
+  close(req);
+  */
+});
+
 /**
- * Handle all of the resources we need to clean up. In this case, we just need 
+ * Handle all of the resources we need to clean up. In this case, we just need
  * to close the database connection.
- * 
+ *
  * @param {Express.Request} req the request object passed to our middleware
  */
 function close(req) {

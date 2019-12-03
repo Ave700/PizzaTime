@@ -32,3 +32,32 @@ footer{
     right: 0px;
     margin-bottom: 0px;
 }
+
+
+.nav-bar {
+  background-color: var(--ourBlack);
+  overflow: hidden;
+}
+
+.nav-bar a {
+  float: left;
+  color: #ffffcc;
+  text-align: center;
+  padding: 30px 30px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.nav-bar a:hover {
+  background-color: red;
+  color: #ffffcc;;
+}
+
+.nav-bar a.active {
+  background-color: white;
+  color: red;
+}
+#login{
+  float: right;
+  color: red;
+}
