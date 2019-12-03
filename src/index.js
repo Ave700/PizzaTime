@@ -58,9 +58,47 @@ app.get('/restaurants', connectDb, function(req, res) {
     let wrapper = {objects: results}
     res.render('restaurant', {wrapper});
   });
-
-
   close(req);
+});
+
+app.get('/catalog', connectDb, function(req, res) {
+   var result = []
+  req.db.query('SELECT * from Toppings', function (err, results) {
+    if (err) throw errl
+    result.push(results)
+   // console.log(result)
+    //let wrapper = [[Toppings: results], [Restaurant: results], [Pizzas: results]]
+    //res.render('catalog', {wrapper});
+    req.db.query('SELECT * from Restaurant', function (err, results) {
+      if (err) throw errl
+      result.push(results)
+      //let wrapper = [[Toppings: results], [Restaurant: results], [Pizzas: results]]
+      //res.render('catalog', {wrapper});
+      req.db.query('SELECT * from Pizzas', function (err, results) {
+        if (err) throw errl
+        result.push(results)
+        console.log(result)
+        //let wrapper = [[Toppings: results], [Restaurant: results], [Pizzas: results]]
+        //res.render('catalog', {wrapper});
+        res.render("catalog", {wrapper: result})
+        close(req);
+      });
+    });
+  });
+  
+  
+  console.log(result)
+  
+  //console.log(result)
+  
+  /*
+  req.db.query('SELECT * from Restaurant', function (err, results) {
+    if (err) throw errl
+    let wrapper = {restaurant: results}
+    res.render('catalog', {wrapper});
+  });
+  close(req);
+  */
 });
 
 /**
