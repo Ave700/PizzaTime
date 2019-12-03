@@ -7,7 +7,8 @@
 </div>
 <h1>Pizza Time</h1>
 <p>Welcome to Pizza Time! A helpful app to find the pizza near you!</p>
-<div class="content" id="main">
+<div class="flex-container">
+ <div class="content" id="main">
   <div class="restaurants">
     {{#with wrapper}}
         {{#each objects}}
@@ -22,5 +23,6 @@
 
     {{/with}}
   </div>
+ </div>
 </div>
 <footer>Created for CS340 class</footer>
