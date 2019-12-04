@@ -96,6 +96,10 @@ app.get('/get_locations', connectDb, function(req, res) {
   });
 });
 
+app.get('/login', connectDb, function(req, res) {
+  res.render("login_register")
+});
+
 /**
  * Handle all of the resources we need to clean up. In this case, we just need
  * to close the database connection.
