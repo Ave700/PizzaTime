@@ -67,6 +67,51 @@ app.get('/restaurants', connectDb, function(req, res) {
   });
 });
 
+app.get('/reviews/:rest_id', connectDb, function(req, res) {
+  req.db.query('SELECT * from Review WHERE RestaurantID = ?',
+  [req.params.rest_id],
+  function (err, results) {
+    if (err) throw err;
+    let wrapper = {objects: results}
+    res.render('review', {wrapper});
+    close(req);
+  });
+});
+
+app.post('/post_review/:rest_id', connectDb, function(req, res) {
+  if('username' in req.session) {
+    req.db.query(
+      "SELECT * from (select username FROM Employees UNION (select username from Users)) as u where u.username = ?",
+      [req.session.username],
+      function (err, results) {
+        if (err) throw err;
+        if(results.length == 1) {
+          if(req.body.rating >= 0 && req.body.rating <= 5) {
+            req.db.query(
+              "INSERT INTO Review (text, rating, RestaurantID, Username) VALUE (?, ?, ?, ?)",
+              [req.body.text, req.body.rating, req.params.rest_id, req.session.username],
+              function (err, results) {
+                if (err) throw err;
+                res.sendStatus(200);
+                close(req);
+              }
+            );
+          } else {
+            res.status(406).send("Rating must be between 0 and 5.");
+            close(req);
+          }
+        } else {
+          res.status(401).send("Unauthorized, please sign in to a valid account.");
+          close(req);
+        }
+      });
+  } else {
+    res.status(401).send("Please sign in before posting a review.");
+    close(req);
+  }
+
+});
+
 app.get('/catalog', connectDb, function(req, res) {
   var result = []
   req.db.query('SELECT * from Toppings', function (err, results) {

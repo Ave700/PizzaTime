@@ -73,3 +73,10 @@ img {
 #error_field {
   color: red;
 }
+
+#new-review{
+  display: block;
+}
+#post-review {
+  display: block;
+}
