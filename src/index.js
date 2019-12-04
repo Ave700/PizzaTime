@@ -47,7 +47,6 @@ function connectDb(req, res, next) {
  * exposes it as `req.db`.
  */
 app.get('/', connectDb, function(req, res) {
-  console.log('Got request for the home page');
   res.render('home');
 
   close(req);
@@ -63,43 +62,38 @@ app.get('/restaurants', connectDb, function(req, res) {
 });
 
 app.get('/catalog', connectDb, function(req, res) {
-   var result = []
+  var result = []
   req.db.query('SELECT * from Toppings', function (err, results) {
     if (err) throw errl
-    result.push(results)
-   // console.log(result)
-    //let wrapper = [[Toppings: results], [Restaurant: results], [Pizzas: results]]
-    //res.render('catalog', {wrapper});
+    result.push({'topping': results});
     req.db.query('SELECT * from Restaurant', function (err, results) {
       if (err) throw errl
-      result.push(results)
-      //let wrapper = [[Toppings: results], [Restaurant: results], [Pizzas: results]]
-      //res.render('catalog', {wrapper});
+      result.push({'restaurant': results});
       req.db.query('SELECT * from Pizzas', function (err, results) {
         if (err) throw errl
-        result.push(results)
-        console.log(result)
-        //let wrapper = [[Toppings: results], [Restaurant: results], [Pizzas: results]]
-        //res.render('catalog', {wrapper});
-        res.render("catalog", {wrapper: result})
+        result.push({'pizza': results});
+        let wrapper = {objects: result}
+        res.render("catalog", {wrapper});
         close(req);
       });
     });
   });
-  
-  
-  console.log(result)
-  
-  //console.log(result)
-  
-  /*
-  req.db.query('SELECT * from Restaurant', function (err, results) {
+});
+
+app.get('/locations', connectDb, function(req, res) {
+  res.render("locations")
+});
+
+app.get('/get_locations', connectDb, function(req, res) {
+  result = {}
+  req.db.query('SELECT * from Cities', function (err, results) {
     if (err) throw errl
-    let wrapper = {restaurant: results}
-    res.render('catalog', {wrapper});
+    result['cities'] = results;
+    req.db.query('SELECT RestaurantID, rest_name, Zipcode from Restaurant', function (err, results) {
+      result['restaurants'] = results;
+      res.json(result);
+    });
   });
-  close(req);
-  */
 });
 
 /**
@@ -128,4 +122,3 @@ const port = process.env.PORT || 3000;
 app.listen(port, function() {
   console.log('== Server is listening on port', port);
 });
-

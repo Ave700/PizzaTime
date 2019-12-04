@@ -11,25 +11,60 @@
 <div class="content" id="main">
   <div class="catalog">
     {{#with wrapper}}
-        {{#with result.[0]}}
-            {{#each results}}
-                <div class="topContainer">
-                <table>
-                    <tr>
-                        <th>Topping</th>
-                        <th>Price</th>
-                    </tr>
-                    <tr>
-                        <td>{{name}}</td>
-                        <td>{{price}}</td>
-                    </tr>
-                    
-                </table>
-                </div>
-          {{/each}}
+        {{#with objects.[0]}}
+            <div class="topContainer">
+              <table>
+              <tr>
+                  <th>Topping</th>
+                  <th>Price</th>
+              </tr>
+              {{#each topping}}
+                  <tr>
+                      <td>{{name}}</td>
+                      <td>{{price}}</td>
+                  </tr>
+            {{/each}}
+            </table>
+          </div>
         {{/with}}
-        
-
+        {{#with objects.[1]}}
+            <div class="topContainer">
+              <table>
+              <tr>
+                  <th>Restaurant Name</th>
+                  <th>Address</th>
+                  <th>Zip Code</th>
+                  <th>Phone Number</th>
+              </tr>
+              {{#each restaurant}}
+                  <tr>
+                      <td>{{rest_name}}</td>
+                      <td>{{Address}}</td>
+                      <td>{{Zipcode}}</td>
+                      <td>{{PhoneNumber}}</td>
+                  </tr>
+            {{/each}}
+            </table>
+          </div>
+        {{/with}}
+        {{#with objects.[2]}}
+            <div class="topContainer">
+              <table>
+              <tr>
+                  <th>Name</th>
+                  <th>Crust Type</th>
+                  <th>Size</th>
+              </tr>
+              {{#each pizza}}
+                  <tr>
+                      <td>{{name}}</td>
+                      <td>{{CrustType}}</td>
+                      <td>{{Size}}</td>
+                  </tr>
+            {{/each}}
+            </table>
+          </div>
+        {{/with}}
     {{/with}}
   </div>
 </div>
