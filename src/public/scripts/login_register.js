@@ -1,9 +1,5 @@
-function logged_in(data) {
-  console.log('logged in');
-}
-
-function registered(data) {
-  console.log('registered');
+function refresh_page(data) {
+  location.reload(true);
 }
 
 function failed(data) {
@@ -21,7 +17,7 @@ function() {
     url: '/login',
     type: 'POST',
     data: json_to_send,
-    success: logged_in,
+    success: refresh_page,
     error: failed});
 });
 
@@ -34,6 +30,6 @@ function() {
     url: '/register',
     type: 'POST',
     data: json_to_send,
-    success: registered,
+    sucess: refresh_page,
     error: failed});
 });

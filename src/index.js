@@ -62,8 +62,8 @@ app.get('/restaurants', connectDb, function(req, res) {
     if (err) throw err;
     let wrapper = {objects: results}
     res.render('restaurant', {wrapper});
+    close(req);
   });
-  close(req);
 });
 
 app.get('/catalog', connectDb, function(req, res) {
@@ -86,7 +86,7 @@ app.get('/catalog', connectDb, function(req, res) {
 });
 
 app.get('/locations', connectDb, function(req, res) {
-  res.render("locations")
+  res.render("locations");
 });
 
 app.get('/get_locations', connectDb, function(req, res) {
@@ -97,12 +97,18 @@ app.get('/get_locations', connectDb, function(req, res) {
     req.db.query('SELECT RestaurantID, rest_name, Zipcode from Restaurant', function (err, results) {
       result['restaurants'] = results;
       res.json(result);
+      close(req);
     });
   });
 });
 
 app.get('/login_page', connectDb, function(req, res) {
-  res.render("login_register");
+  if('username' in req.session) {
+    res.render('logged_in');
+  } else {
+    res.render("login_register");
+  }
+  close(req);
 });
 
 app.post('/login', connectDb, function(req, res) {
@@ -117,6 +123,7 @@ app.post('/login', connectDb, function(req, res) {
       } else {
         res.status(401).send("Account not found.");
       }
+      close(req);
     });
 });
 
@@ -134,11 +141,18 @@ app.post('/register', connectDb, function(req, res) {
             if (err) throw err;
             req.session.username = req.body.username;
             res.sendStatus(200);
+            close(req);
           });
       } else {
         res.status(401).send("Username already exists, try a new one.");
+        close(req);
       }
     });
+});
+
+app.get('/logout', connectDb, function(req, res) {
+  delete req.session['username'];
+  res.sendStatus(200);
 });
 
 /**
