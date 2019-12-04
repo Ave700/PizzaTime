@@ -10,9 +10,14 @@ const express = require('express');
 const exphbs = require('express-handlebars');
 const mysql = require('mysql');
 const path = require('path');
-
+const session = require('express-session');
+const bodyParser = require('body-parser');
 const app = express();
 
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
+app.use(session({secret: 'sshhh'}));
 // Configure handlebars
 const hbs = exphbs.create({
   defaultLayout: 'main',
@@ -96,8 +101,44 @@ app.get('/get_locations', connectDb, function(req, res) {
   });
 });
 
-app.get('/login', connectDb, function(req, res) {
-  res.render("login_register")
+app.get('/login_page', connectDb, function(req, res) {
+  res.render("login_register");
+});
+
+app.post('/login', connectDb, function(req, res) {
+  req.db.query(
+    "SELECT * from (select username, password FROM Employees UNION (select username, password from Users)) as u where u.username = ?",
+    [req.body.username],
+    function (err, results) {
+      if (err) throw err;
+      if(results.length == 1 && results[0]['password'] == req.body.password) {
+        req.session.username = req.body.username;
+        res.sendStatus(200);
+      } else {
+        res.status(401).send("Account not found.");
+      }
+    });
+});
+
+app.post('/register', connectDb, function(req, res) {
+  req.db.query(
+    "SELECT * from (select username, password FROM Employees UNION (select username, password from Users)) as u where u.username = ?",
+    [req.body.username],
+    function (err, results) {
+      if (err) throw err;
+      if(results.length == 0) {
+        req.db.query(
+          "INSERT INTO Users (Username, Password) VALUE (?, ?)",
+          [req.body.username, req.body.password],
+          function (err, results) {
+            if (err) throw err;
+            req.session.username = req.body.username;
+            res.sendStatus(200);
+          });
+      } else {
+        res.status(401).send("Username already exists, try a new one.");
+      }
+    });
 });
 
 /**

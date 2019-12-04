@@ -69,3 +69,7 @@ img {
 .flex-container {
   display: flex;
 }
+
+#error_field {
+  color: red;
+}
