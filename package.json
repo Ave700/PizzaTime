@@ -19,8 +19,10 @@
   },
   "homepage": "https://github.com/bradenhc-osu/nodejs-web-template#readme",
   "dependencies": {
+    "body-parser": "^1.19.0",
     "express": "^4.17.1",
     "express-handlebars": "^3.1.0",
+    "express-session": "^1.17.0",
     "jQuery": "^1.7.4",
     "md5": "^2.2.1",
     "mysql": "^2.17.1",
