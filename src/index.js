@@ -12,6 +12,7 @@ const mysql = require('mysql');
 const path = require('path');
 const session = require('express-session');
 const bodyParser = require('body-parser');
+var md5 = require('md5');
 const app = express();
 
 app.use(bodyParser.urlencoded({
@@ -117,7 +118,7 @@ app.post('/login', connectDb, function(req, res) {
     [req.body.username],
     function (err, results) {
       if (err) throw err;
-      if(results.length == 1 && results[0]['password'] == req.body.password) {
+      if(results.length == 1 && results[0]['password'] == md5(req.body.password)) {
         req.session.username = req.body.username;
         res.sendStatus(200);
       } else {
@@ -136,7 +137,7 @@ app.post('/register', connectDb, function(req, res) {
       if(results.length == 0) {
         req.db.query(
           "INSERT INTO Users (Username, Password) VALUE (?, ?)",
-          [req.body.username, req.body.password],
+          [req.body.username, md5(req.body.password)],
           function (err, results) {
             if (err) throw err;
             req.session.username = req.body.username;

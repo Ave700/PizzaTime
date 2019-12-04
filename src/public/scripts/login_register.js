@@ -11,7 +11,7 @@ function failed(data) {
 document.getElementById('login_button').addEventListener('click',
 function() {
   let username = document.getElementById('username').value;
-  let password = md5(document.getElementById('password').value);
+  let password = document.getElementById('password').value;
   json_to_send = {"username": username, "password": password};
   $.ajax({
     url: '/login',
@@ -24,7 +24,7 @@ function() {
 document.getElementById('register_button').addEventListener('click',
 function() {
   let username = document.getElementById('username').value;
-  let password = md5(document.getElementById('password').value);
+  let password = document.getElementById('password').value;
   json_to_send = {"username": username, "password": password};
   $.ajax({
     url: '/register',
