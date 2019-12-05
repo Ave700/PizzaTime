@@ -64,6 +64,7 @@ footer{
 
 img {
  float: right;
+ width: 50px;
 }
 
 .flex-container {
