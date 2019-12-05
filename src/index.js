@@ -131,6 +131,21 @@ app.get('/catalog', connectDb, function(req, res) {
   });
 });
 
+app.get('/pizzas/:pizzaID', connectDb, function(req,res) {
+  var result = []
+  req.db.query('SELECT * from Pizzas WHERE pizzaID =?',[req.params.pizzaID], function (err, results) {
+    if (err) throw err
+    result.push({'pizzas': results});
+    req.db.query('SELECT * from select_Toppings WHERE pizzaID = ?',[req.params.pizzaID], function (err, results) {
+      if (err) throw err
+      result.push({'toppings': results});
+      let wrapper = {objects: result}
+      res.render("pizzas", {wrapper});
+      close(req);
+
+    });
+  });
+});
 app.get('/locations', connectDb, function(req, res) {
   res.render("locations");
 });

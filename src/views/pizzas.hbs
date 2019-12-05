@@ -1,0 +1,38 @@
+<div class="nav-bar">
+  <a href="/">Home</a>
+  <a class = "active" href="/catalog">Catalog</a>
+  <a href="/restaurants">Restaurants</a>
+  <a href="/locations">Locations</a>
+  <a href="/login_page" id="login">Sign In</a>
+</div>
+<h1>Pizza Time</h1>
+
+<div class="flex-container">
+ <div class="content" id="main">
+  <div class="pizzas-box">
+    {{#with wrapper}}
+        {{#with objects.[0]}}
+        <h2>Pizzas</h2>
+         {{#each pizzas}}
+          <div class="pizza">
+            <div class="pizza-name">{{name}}</div>
+            <div class="pizza-crust">{{CrustType}}</div>
+            <div class="pizza-size">{{Size}}</div>
+          </div>
+          {{/each}}
+        {{/with}}
+        {{#with objects.[1]}}
+        <h3>Toppings</h3>
+         {{#each toppings}}
+          <div class="toppings">
+            <div class="topping-name">{{name}}</div>
+          </div>
+          {{/each}}
+        {{/with}}
+    {{/with}}
+  </div>
+ </div>
+</div>
+<footer>Created for CS340 class</footer>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="/scripts/review.js"></script>
