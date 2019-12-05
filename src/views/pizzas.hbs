@@ -12,22 +12,21 @@
   <div class="pizzas-box">
     {{#with wrapper}}
         {{#with objects.[0]}}
-        <h2>Pizzas</h2>
          {{#each pizzas}}
           <div class="pizza">
-            <div class="pizza-name">{{name}}</div>
-            <div class="pizza-crust">{{CrustType}}</div>
-            <div class="pizza-size">{{Size}}</div>
+            <h2 class="pizza-name">{{name}} Pizza</h2>
+            <div class="pizza-crust">Crust Type: {{CrustType}}</div>
+            <div class="pizza-size">Size: {{Size}}"</div>
           </div>
           {{/each}}
         {{/with}}
         {{#with objects.[1]}}
         <h3>Toppings</h3>
+        <div>
          {{#each toppings}}
-          <div class="toppings">
-            <div class="topping-name">{{name}}</div>
-          </div>
+          <div class="toppings">{{name}}</div>
           {{/each}}
+          </div>
         {{/with}}
     {{/with}}
   </div>
