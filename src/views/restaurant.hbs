@@ -7,22 +7,22 @@
 </div>
 <h1>Pizza Time</h1>
 <p>Welcome to Pizza Time! A helpful app to find the pizza near you!</p>
-<div class="flex-container">
  <div class="content" id="main">
   <div class="restaurants">
     {{#with wrapper}}
         {{#each objects}}
-          <div class="restContainer">
-          <h2 id="Rname"><a href="/reviews/{{RestaurantID}}">{{rest_name}}</a></h2>
-          <p id="Address">{{Address}}</p>
-          <p id="phone#">{{PhoneNumber}}</p>
-          <p id="zipcode">{{Zipcode}}</p>
-          <img src="/images/{{imageName}}.png">
+          <div class="flex-container">
+            <div class="restContainer">
+              <h2 id="Rname"><a href="/reviews/{{RestaurantID}}">{{rest_name}}</a></h2>
+              <p id="phoneN">Contact Us: {{PhoneNumber}}</p>
+		<p id="Address">Located At: {{Address}}</p>
+	      <p id="zipcode">{{Zipcode}}</p>
+              <img src="/images/{{imageName}}.png">
+            </div>
           </div>
         {{/each}}
 
     {{/with}}
   </div>
  </div>
-</div>
 <footer>Created for CS340 class</footer>

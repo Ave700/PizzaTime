@@ -64,10 +64,28 @@ footer{
 
 img {
  float: right;
+ width: 300px;
+ margin: 30px;
+}
+
+#homepic{
+ width: 2000px;
+ margin: 0px;
+}
+
+#phoneN{
+ font-weight:bold;
 }
 
 .flex-container {
-  display: flex;
+ display:flex;
+ margin: 80px;
+ width: 300px;
+ height: 600px; 
+}
+.restaurants {
+ display:flex;
+ flex-wrap:wrap;
 }
 
 #error_field {
