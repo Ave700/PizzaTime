@@ -80,8 +80,7 @@ img {
 .flex-container {
  display:flex;
  margin: 80px;
- width: 300px;
- height: 600px; 
+ width: 300px; 
 }
 .restaurants {
  display:flex;
