@@ -9,14 +9,22 @@
  <div class="content" id="main">
   <div class="reviews-box">
     {{#with wrapper}}
-        {{#each objects}}
+      {{#with objects.[1]}}
+      <h2>Menu</h2>
+      {{#each menu}}
+      
+      <div><a href="/pizzas/{{pizzaID}}">{{name}}</a> - {{Size}}" - ${{price}}</div>
+      {{/each}}
+      {{/with}}
+        {{#with objects.[0]}}
+          {{#each review}}
           <div class="review">
             <h2 class="rating">Rating: {{rating}}/5</a></h2>
             <div class="review-textbox">{{text}}</div>
             <div class="review-username">-{{Username}}</div>
           </div>
         {{/each}}
-
+      {{/with}}
     {{/with}}
   </div>
   <div class = "review-post-area">
