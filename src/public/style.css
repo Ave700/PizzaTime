@@ -68,7 +68,8 @@ img {
 }
 
 .flex-container {
-  display: flex;
+ display: flex;
+ flex-direction:row; 
 }
 
 #error_field {
