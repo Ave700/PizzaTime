@@ -68,13 +68,20 @@ app.get('/restaurants', connectDb, function(req, res) {
 });
 
 app.get('/reviews/:rest_id', connectDb, function(req, res) {
+  var result = []
   req.db.query('SELECT * from Review WHERE RestaurantID = ?',
   [req.params.rest_id],
   function (err, results) {
     if (err) throw err;
-    let wrapper = {objects: results}
-    res.render('review', {wrapper});
-    close(req);
+    result.push({'review': results});
+    req.db.query('SELECT * FROM Pizzas NATURAL JOIN sell_make WHERE RestaruantID = ?',[req.params.rest_id],
+    function (err, results){
+      if (err) throw err;
+      result.push({'menu': results});
+      let wrapper = {objects: result}
+      res.render('review', {wrapper});
+      close(req);
+    });
   });
 });
 
