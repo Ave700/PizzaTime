@@ -59,7 +59,7 @@ app.get('/', connectDb, function(req, res) {
 });
 
 app.get('/restaurants', connectDb, function(req, res) {
-  req.db.query('SELECT * from Restaurant', function (err, results) {
+  req.db.query('SELECT Res.*, AVG(Rev.rating) AvgRating from Restaurant Res, Review Rev where Res.RestaurantID=Rev.RestaurantID group by Res.RestaurantID', function (err, results) {
     if (err) throw err;
     let wrapper = {objects: results}
     res.render('restaurant', {wrapper});
@@ -131,21 +131,6 @@ app.get('/catalog', connectDb, function(req, res) {
   });
 });
 
-app.get('/pizzas/:pizzaID', connectDb, function(req,res) {
-  var result = []
-  req.db.query('SELECT * from Pizzas WHERE pizzaID =?',[req.params.pizzaID], function (err, results) {
-    if (err) throw err
-    result.push({'pizzas': results});
-    req.db.query('SELECT * from select_Toppings WHERE pizzaID = ?',[req.params.pizzaID], function (err, results) {
-      if (err) throw err
-      result.push({'toppings': results});
-      let wrapper = {objects: result}
-      res.render("pizzas", {wrapper});
-      close(req);
-
-    });
-  });
-});
 app.get('/locations', connectDb, function(req, res) {
   res.render("locations");
 });
