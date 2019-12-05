@@ -68,6 +68,11 @@ img {
  margin: 30px;
 }
 
+#homepic{
+ width: 2000px;
+ margin: 0px;
+}
+
 #phoneN{
  font-weight:bold;
 }
