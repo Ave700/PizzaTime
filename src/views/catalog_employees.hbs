@@ -21,7 +21,12 @@
               {{#each topping}}
                   <tr>
                       <td>{{name}}</td>
+
                       <td><input type="text" name="Topname" placeholder="{{price}}"></input></td>
+
+			<button class = "UpdateTopping">Update</button>
+			<button class = "DeleteTopping">Delete</button>
+
                   </tr>
             {{/each}}
 		 <tr>
@@ -47,6 +52,8 @@
                       <td>{{Address}}</td>
                       <td>{{Zipcode}}</td>
                       <td>{{PhoneNumber}}</td>
+			<button class = "UpdateTopping">Update</button>
+                        <button class = "DeleteTopping">Delete</button>
                   </tr>
             {{/each}}
 		<tr>
@@ -72,6 +79,8 @@
                       <td><a href="/pizzas/{{pizzaID}}">{{name}}</a></td>
                       <td>{{CrustType}}</td>
                       <td>{{Size}}</td>
+			<button class = "UpdateTopping">Update</button>
+                        <button class = "DeleteTopping">Delete</button>
                   </tr>
             {{/each}}
 		<tr>
