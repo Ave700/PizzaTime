@@ -7,7 +7,7 @@
 </div>
 
 <h1>Pizza Time</h1>
-<p>This is the catalog of all possible items</p>
+<p>This is the catalog of all possible items USER</p>
 <div class="content" id="main">
   <div class="catalog">
     {{#with wrapper}}
@@ -21,14 +21,9 @@
               {{#each topping}}
                   <tr>
                       <td>{{name}}</td>
-                      <td><input type="text" name="Topname" placeholder="{{price}}"></input></td>
+                      <td>{{price}}</td>
                   </tr>
             {{/each}}
-		 <tr>
-                    <td><input type="text" name="Topname" placeholder="Insert Topping Name"></input></td>
-                    <td><input type="text" name="Price" placeholder="Insert Price"></input></td>
-			<td><button id = "UpdateFirst">Update</button></td>
-                </tr>
             </table>
           </div>
         {{/with}}
@@ -49,13 +44,6 @@
                       <td>{{PhoneNumber}}</td>
                   </tr>
             {{/each}}
-		<tr>
-                    <td><input type="text" name="RName">Insert Topping Name</input></td>
-                    <td><input type="text" name="Address">Insert Address</input></td>
-                    <td><input type="text" name="Address">Insert Zipcode</input></td>
-                    <td><input type="text" name="Address">Insert Phone #</input></td>
-                	<td><button id = "UpdateSecond">Update</button></td>
-		</tr>
             </table>
           </div>
         {{/with}}
@@ -74,12 +62,6 @@
                       <td>{{Size}}</td>
                   </tr>
             {{/each}}
-		<tr>
-                    <td><input type="text" name="pizzaName">Insert Pizza Name</input></td>
-                    <td><input type="text" name="CrustType">Insert CrustType</input></td>
-                    <td><input type="text" name="PizzaSize">Insert Size</input></td>
-                	<td><button id = "UpdateThird">Update</button></td>
-		</tr>
             </table>
           </div>
         {{/with}}
