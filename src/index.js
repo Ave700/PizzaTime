@@ -152,7 +152,6 @@ app.post('/delete_review/:rev_id', connectDb, function(req, res) {
     req.db.query('SELECT * FROM Employees WHERE Username = ?', [req.session.username],
     function(err, employee_results) {
       if (err) throw err;
-      console.log(employee_results);
       if(employee_results.length == 1) {
         req.db.query('DELETE FROM Review WHERE ReviewID = ?', [req.params.rev_id],
         function(err, results) {
@@ -163,7 +162,6 @@ app.post('/delete_review/:rev_id', connectDb, function(req, res) {
         req.db.query('SELECT Username FROM Review WHERE ReviewID = ?', [req.params.rev_id],
         function(err, results) {
           if (err) throw err;
-          console.log(results);
           if(results.length == 1 && results[0].Username == req.session.username) {
             req.db.query('DELETE FROM Review WHERE ReviewID = ?', [req.params.rev_id],
             function(err, results) {
@@ -228,6 +226,70 @@ app.get('/pizzas/:pizzaID', connectDb, function(req,res) {
 
 app.get('/locations', connectDb, function(req, res) {
   res.render("locations");
+});
+
+app.post('/topping/update/:topping_name', connectDb, function(req, res) {
+  if('username' in req.session) {
+    req.db.query('SELECT * FROM Employees WHERE Username = ?', [req.session.username],
+    function(err, employee_results) {
+      if (err) throw err;
+      if(employee_results.length == 1) {
+        req.db.query('UPDATE Toppings SET name = ?, price = ? WHERE name = ?',
+        [req.body.name, req.body.price, req.params.topping_name],
+        function(err, employee_results) {
+          if (err) throw err;
+          console.log(employee_results);
+          res.sendStatus(200);
+        });
+      } else {
+        res.status(401).send("Not authorized to update this row.");
+      }
+    });
+  } else {
+    res.status(401).send("Not authorized to update this row.");
+  }
+});
+
+app.post('/restaurant/update/:restaurant_id', connectDb, function(req, res) {
+  if('username' in req.session) {
+    req.db.query('SELECT * FROM Employees WHERE Username = ?', [req.session.username],
+    function(err, employee_results) {
+      if (err) throw err;
+      if(employee_results.length == 1) {
+        req.db.query('UPDATE Restaurant SET rest_name = ?, Address = ?, PhoneNumber = ?, Zipcode = ? WHERE RestaruantID = ?',
+        [req.body.rest_name, req.body.Address, req.body.PhoneNumber, req.body.Zipcode, req.params.restaurant_id],
+        function(err, employee_results) {
+          if (err) throw err;
+          res.sendStatus(200);
+        });
+      } else {
+        res.status(401).send("Not authorized to update this row.");
+      }
+    });
+  } else {
+    res.status(401).send("Not authorized to update this row.");
+  }
+});
+
+app.post('/pizza/update/:pizza_id', connectDb, function(req, res) {
+  if('username' in req.session) {
+    req.db.query('SELECT * FROM Employees WHERE Username = ?', [req.session.username],
+    function(err, employee_results) {
+      if (err) throw err;
+      if(employee_results.length == 1) {
+        req.db.query('UPDATE Restaurant SET name = ?, CrustType = ?, Size = ? WHERE pizzaID = ?',
+        [req.body.name, req.body.CrustType, req.body.Size, req.params.pizza_id],
+        function(err, employee_results) {
+          if (err) throw err;
+          res.sendStatus(200);
+        });
+      } else {
+        res.status(401).send("Not authorized to update this row.");
+      }
+    });
+  } else {
+    res.status(401).send("Not authorized to update this row.");
+  }
 });
 
 app.get('/get_locations', connectDb, function(req, res) {
