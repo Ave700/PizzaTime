@@ -1,0 +1,89 @@
+<div class="nav-bar">
+  <a href="/">Home</a>
+  <a class = "active" href="catalog">Catalog</a>
+  <a href="/restaurants">Restaurants</a>
+  <a href="/locations">Locations</a>
+  <a href="/login_page" id="login">Sign In</a>
+</div>
+
+<h1>Pizza Time</h1>
+<p>This is the catalog of all possible items</p>
+<div class="content" id="main">
+  <div class="catalog">
+    {{#with wrapper}}
+        {{#with objects.[0]}}
+            <div class="topContainer">
+              <center><table id="firstT"></center>
+              <tr>
+                  <th>Topping</th>
+                  <th>Price</th>
+              </tr>
+              {{#each topping}}
+                  <tr>
+                      <td>{{name}}</td>
+                      <td>{{price}}</td>
+                  </tr>
+            {{/each}}
+		 <tr>
+                    <td><input type="text" name="Topname">Insert Topping Name</input></td>
+                    <td><input type="text" name="Price">Insert Price</input></td>
+			<td><button id = "UpdateFirst">Update</button></td>
+                </tr>
+            </table>
+          </div>
+        {{/with}}
+        {{#with objects.[1]}}
+            <div class="topContainer">
+              <center><table></center>
+              <tr>
+                  <th>Restaurant Name</th>
+                  <th>Address</th>
+                  <th>Zip Code</th>
+                  <th>Phone Number</th>
+              </tr>
+              {{#each restaurant}}
+                  <tr>
+                      <td>{{rest_name}}</td>
+                      <td>{{Address}}</td>
+                      <td>{{Zipcode}}</td>
+                      <td>{{PhoneNumber}}</td>
+                  </tr>
+            {{/each}}
+		<tr>
+                    <td><input type="text" name="RName">Insert Topping Name</input></td>
+                    <td><input type="text" name="Address">Insert Address</input></td>
+                    <td><input type="text" name="Address">Insert Zipcode</input></td>
+                    <td><input type="text" name="Address">Insert Phone #</input></td>
+                	<td><button id = "UpdateSecond">Update</button></td>
+		</tr>
+            </table>
+          </div>
+        {{/with}}
+        {{#with objects.[2]}}
+            <div class="topContainer">
+              <center><table></center>
+              <tr>
+                  <th>Name</th>
+                  <th>Crust Type</th>
+                  <th>Size</th>
+              </tr>
+              {{#each pizza}}
+                  <tr>
+                      <td><a href="/pizzas/{{pizzaID}}">{{name}}</a></td>
+                      <td>{{CrustType}}</td>
+                      <td>{{Size}}</td>
+                  </tr>
+            {{/each}}
+		<tr>
+                    <td><input type="text" name="pizzaName">Insert Pizza Name</input></td>
+                    <td><input type="text" name="CrustType">Insert CrustType</input></td>
+                    <td><input type="text" name="PizzaSize">Insert Size</input></td>
+                	<td><button id = "UpdateThird">Update</button></td>
+		</tr>
+            </table>
+          </div>
+        {{/with}}
+    {{/with}}
+  </div>
+</div>
+<footer>Created for CS340 class</footer>

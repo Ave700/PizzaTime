@@ -195,8 +195,17 @@ app.get('/catalog', connectDb, function(req, res) {
         if (err) throw errl
         result.push({'pizza': results});
         let wrapper = {objects: result}
-        res.render("catalog", {wrapper});
-        close(req);
+        req.db.query('SELECT Username FROM Employees WHERE Username = ?', [req.session.username], function(err, result2){
+          if(result2.length == 1)
+          {
+            res.render('catalog_employees', {wrapper});
+          } else if(req.session.username == undefined) {
+            res.render('catalog_user', {wrapper});
+          } else {
+            res.render('catalog_user', {wrapper});
+          }
+          close(req);
+       });
       });
     });
   });
@@ -216,6 +225,7 @@ app.get('/pizzas/:pizzaID', connectDb, function(req,res) {
     });
   });
 });
+
 app.get('/locations', connectDb, function(req, res) {
   res.render("locations");
 });
