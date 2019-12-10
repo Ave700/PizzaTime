@@ -20,9 +20,8 @@
               </tr>
               {{#each topping}}
                   <tr>
-                      <td>{{name}}</td>
-
-                      <td><input type="text" name="Topname" placeholder="{{price}}"></input></td>
+                      <td><input type="text" name="Topname" placeholder="{{name}}"></input></td>
+                      <td><input type="text" name="Price" placeholder="{{price}}"></input></td>
 
 			<td><button class = "UpdateTopping">Update</button></td>
 			<td><button class = "DeleteTopping">Delete</button></td>
@@ -48,12 +47,12 @@
               </tr>
               {{#each restaurant}}
                   <tr>
-                      <td>{{rest_name}}</td>
-                      <td>{{Address}}</td>
-                      <td>{{Zipcode}}</td>
-                      <td>{{PhoneNumber}}</td>
-			<td><button class = "UpdateTopping">Update</button></td>
-                        <td><button class = "DeleteTopping">Delete</button></td>
+                      <td><input type="text" name="RName" placeholder="{{rest_name}}"></input></td>
+                      <td><input type="text" name="Address" placeholder="{{Address}}"></input></td>
+                      <td><input type="text" name="Zipcode" placeholder="{{Zipcode}}"></input></td>
+                      <td><input type="text" name="PhoneNumber" placeholder="{{PhoneNumber}}"></input></td>
+			                <td><button class = "UpdateTopping">Update</button></td>
+                      <td><button class = "DeleteTopping">Delete</button></td>
                   </tr>
             {{/each}}
 		<tr>
@@ -70,6 +69,7 @@
             <div class="topContainer">
               <center><table></center>
               <tr>
+                  <th>Link To Pizza</th>
                   <th>Name</th>
                   <th>Crust Type</th>
                   <th>Size</th>
@@ -77,13 +77,15 @@
               {{#each pizza}}
                   <tr>
                       <td><a href="/pizzas/{{pizzaID}}">{{name}}</a></td>
-                      <td>{{CrustType}}</td>
-                      <td>{{Size}}</td>
-			<td><button class = "UpdateTopping">Update</button></td>
-                        <td><button class = "DeleteTopping">Delete</button></td>
+                      <td><input type="text" name="PizzaName" placeholder="{{name}}"></input></td>
+                      <td><input type="text" name="CrustType" placeholder="{{CrustType}}"></input></td>
+                      <td><input type="text" name="Size" placeholder="{{Size}}"></input></td>
+                			<td><button class = "UpdateTopping">Update</button></td>
+                      <td><button class = "DeleteTopping">Delete</button></td>
                   </tr>
             {{/each}}
 		<tr>
+                    <td></td>
                     <td><input type="text" name="pizzaName">Insert Pizza Name</input></td>
                     <td><input type="text" name="CrustType">Insert CrustType</input></td>
                     <td><input type="text" name="PizzaSize">Insert Size</input></td>
