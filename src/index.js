@@ -131,10 +131,12 @@ app.get('/catalog', connectDb, function(req, res) {
         if (err) throw errl
         result.push({'pizza': results});
         let wrapper = {objects: result}
-        req.db.query('SELECT Username FROM Employees', function(err, result2){
-          if("?" in result2, [req.session.username])
+        req.db.query('SELECT Username FROM Employees WHERE Username = ?', [req.session.username], function(err, result2){
+          if(result2.length == 1)
           {
             res.render('catalog_employees', {wrapper});
+          } else if(req.session.username == undefined) {
+            res.render('catalog_user', {wrapper});
           } else {
             res.render('catalog_user', {wrapper});
           }
