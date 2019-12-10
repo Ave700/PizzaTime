@@ -23,8 +23,8 @@
                       <td><input type="text" name="Topname" value="{{name}}"></input></td>
                       <td><input type="text" name="Price" value="{{price}}"></input></td>
 
-			<td><button class = "UpdateTopping" pk={{name}}>Update</button></td>
-			<td><button class = "DeleteTopping" pk={{name}}>Delete</button></td>
+			<td><button class = "UpdateTopping" pk="{{name}}">Update</button></td>
+			<td><button class = "DeleteTopping" pk="{{name}}">Delete</button></td>
 
                   </tr>
             {{/each}}
@@ -57,7 +57,7 @@
                   </tr>
             {{/each}}
 		<tr>
-                    <td><input type="text" name="RName" placeholder="Insert Topping Name"></input></td>
+                    <td><input type="text" name="RName" placeholder="Insert Restaurant Name"></input></td>
                     <td><input type="text" name="Address" placeholder="Insert Address"></input></td>
                     <td><input type="text" name="Address" placeholder="Insert Zipcode"></input></td>
                     <td><input type="text" name="Address" placeholder="Insert Phone #"></input></td>
