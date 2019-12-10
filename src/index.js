@@ -73,15 +73,43 @@ app.get('/reviews/:rest_id', connectDb, function(req, res) {
   [req.params.rest_id],
   function (err, results) {
     if (err) throw err;
-    result.push({'review': results});
-    req.db.query('SELECT * FROM Pizzas NATURAL JOIN sell_make WHERE RestaruantID = ?',[req.params.rest_id],
-    function (err, results){
-      if (err) throw err;
-      result.push({'menu': results});
-      let wrapper = {objects: result}
-      res.render('review', {wrapper});
-      close(req);
-    });
+    if('username' in req.session) {
+      req.db.query('SELECT * FROM Employees WHERE Username = ?', [req.session.username],
+      function(err, employee_results) {
+        if (err) throw err;
+        if(employee_results.length == 1) {
+          for(let i = 0; i < results.length; i++) {
+            results[i].can_delete = true;
+          }
+        } else {
+          for(let i = 0; i < results.length; i++) {
+            if(results[i].Username == req.session.username) {
+                results[i].can_delete = true;
+            }
+          }
+        }
+        result.push({'review': results});
+        req.db.query('SELECT * FROM Pizzas NATURAL JOIN sell_make WHERE RestaruantID = ?',[req.params.rest_id],
+        function (err, results){
+          if (err) throw err;
+          result.push({'menu': results});
+          let wrapper = {objects: result}
+          res.render('review', {wrapper});
+          close(req);
+        });
+      });
+    } else {
+        result.push({'review': results});
+        req.db.query('SELECT * FROM Pizzas NATURAL JOIN sell_make WHERE RestaruantID = ?',[req.params.rest_id],
+        function (err, results){
+          if (err) throw err;
+          result.push({'menu': results});
+          let wrapper = {objects: result}
+          res.render('review', {wrapper});
+          close(req);
+        });
+    }
+
   });
 });
 
@@ -117,6 +145,42 @@ app.post('/post_review/:rest_id', connectDb, function(req, res) {
     close(req);
   }
 
+});
+
+app.post('/delete_review/:rev_id', connectDb, function(req, res) {
+  if('username' in req.session) {
+    req.db.query('SELECT * FROM Employees WHERE Username = ?', [req.session.username],
+    function(err, employee_results) {
+      if (err) throw err;
+      console.log(employee_results);
+      if(employee_results.length == 1) {
+        req.db.query('DELETE FROM Review WHERE ReviewID = ?', [req.params.rev_id],
+        function(err, results) {
+          if (err) throw err;
+          res.sendStatus(200);
+        });
+      } else {
+        req.db.query('SELECT Username FROM Review WHERE ReviewID = ?', [req.params.rev_id],
+        function(err, results) {
+          if (err) throw err;
+          console.log(results);
+          if(results.length == 1 && results[0].Username == req.session.username) {
+            req.db.query('DELETE FROM Review WHERE ReviewID = ?', [req.params.rev_id],
+            function(err, results) {
+              if (err) throw err;
+              res.sendStatus(200);
+            });
+          } else {
+            res.status(401).send("Not authorized to delete review.");
+            close(req);
+          }
+        });
+      }
+    });
+  } else {
+    res.status(401).send("Not authorized to delete review.");
+    close(req);
+  }
 });
 
 app.get('/catalog', connectDb, function(req, res) {

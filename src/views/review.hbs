@@ -12,7 +12,7 @@
       {{#with objects.[1]}}
       <h2>Menu</h2>
       {{#each menu}}
-      
+
       <div><a href="/pizzas/{{pizzaID}}">{{name}}</a> - {{Size}}" - ${{price}}</div>
       {{/each}}
       {{/with}}
@@ -22,6 +22,9 @@
             <h2 class="rating">Rating: {{rating}}/5</a></h2>
             <div class="review-textbox">{{text}}</div>
             <div class="review-username">-{{Username}}</div>
+            {{#if can_delete}}
+              <input class="delete-review" revid = {{ReviewID}} type="submit" value="Delete">
+            {{/if}}
           </div>
         {{/each}}
       {{/with}}
