@@ -238,6 +238,7 @@ app.post('/topping/update/:topping_name', connectDb, function(req, res) {
         [req.body.name, req.body.price, req.params.topping_name],
         function(err, employee_results) {
           if (err) throw err;
+          console.log(req.body);
           console.log(employee_results);
           res.sendStatus(200);
         });
@@ -256,7 +257,7 @@ app.post('/restaurant/update/:restaurant_id', connectDb, function(req, res) {
     function(err, employee_results) {
       if (err) throw err;
       if(employee_results.length == 1) {
-        req.db.query('UPDATE Restaurant SET rest_name = ?, Address = ?, PhoneNumber = ?, Zipcode = ? WHERE RestaruantID = ?',
+        req.db.query('UPDATE Restaurant SET rest_name = ?, Address = ?, PhoneNumber = ?, Zipcode = ? WHERE RestaurantID = ?',
         [req.body.rest_name, req.body.Address, req.body.PhoneNumber, req.body.Zipcode, req.params.restaurant_id],
         function(err, employee_results) {
           if (err) throw err;
@@ -277,7 +278,7 @@ app.post('/pizza/update/:pizza_id', connectDb, function(req, res) {
     function(err, employee_results) {
       if (err) throw err;
       if(employee_results.length == 1) {
-        req.db.query('UPDATE Restaurant SET name = ?, CrustType = ?, Size = ? WHERE pizzaID = ?',
+        req.db.query('UPDATE Pizzas SET name = ?, CrustType = ?, Size = ? WHERE pizzaID = ?',
         [req.body.name, req.body.CrustType, req.body.Size, req.params.pizza_id],
         function(err, employee_results) {
           if (err) throw err;
