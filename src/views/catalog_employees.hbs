@@ -7,7 +7,7 @@
 </div>
 
 <h1>Pizza Time</h1>
-<p>This is the catalog of all possible items</p>
+<p>This is the catalog of all possible items, as an Employee you can change everything here.</p>
 <div class="content" id="main">
   <div class="catalog">
     {{#with wrapper}}
@@ -56,10 +56,10 @@
                   </tr>
             {{/each}}
 		<tr>
-                    <td><input type="text" name="RName">Insert Topping Name</input></td>
-                    <td><input type="text" name="Address">Insert Address</input></td>
-                    <td><input type="text" name="Address">Insert Zipcode</input></td>
-                    <td><input type="text" name="Address">Insert Phone #</input></td>
+                    <td><input type="text" name="RName" placeholder="Insert Topping Name"></input></td>
+                    <td><input type="text" name="Address" placeholder="Insert Address"></input></td>
+                    <td><input type="text" name="Address" placeholder="Insert Zipcode"></input></td>
+                    <td><input type="text" name="Address" placeholder="Insert Phone #"></input></td>
                 	<td><button id = "UpdateSecond">Update</button></td>
 		</tr>
             </table>
@@ -86,9 +86,9 @@
             {{/each}}
 		<tr>
                     <td></td>
-                    <td><input type="text" name="pizzaName">Insert Pizza Name</input></td>
-                    <td><input type="text" name="CrustType">Insert CrustType</input></td>
-                    <td><input type="text" name="PizzaSize">Insert Size</input></td>
+                    <td><input type="text" name="pizzaName" placeholder="Insert Pizza Name"></input></td>
+                    <td><input type="text" name="CrustType" placeholder="Insert CrustType"></input></td>
+                    <td><input type="text" name="PizzaSize" placeholder="Insert Size"></input></td>
                 	<td><button id = "UpdateThird">Update</button></td>
 		</tr>
             </table>
