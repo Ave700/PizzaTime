@@ -1,3 +1,4 @@
+
 <div class="nav-bar">
   <a href="/">Home</a>
   <a class = "active" href="catalog">Catalog</a>
@@ -7,7 +8,7 @@
 </div>
 
 <h1>Pizza Time</h1>
-<p>This is the catalog of all possible items, as an Employee you can change everything here</p>
+<p>This is the catalog of all possible items, as an Employee you can change everything here.</p>
 <div class="content" id="main">
   <div class="catalog">
     {{#with wrapper}}
@@ -20,11 +21,11 @@
               </tr>
               {{#each topping}}
                   <tr>
-                      <td><input type="text" name="Topname" placeholder="{{name}}"></input></td>
-                      <td><input type="text" name="Price" placeholder="{{price}}"></input></td>
+                      <td><input type="text" name="Topname" value="{{name}}"></input></td>
+                      <td><input type="text" name="Price" value="{{price}}"></input></td>
 
-			<td><button class = "UpdateTopping">Update</button></td>
-			<td><button class = "DeleteTopping">Delete</button></td>
+			<td><button class = "UpdateTopping" pk="{{name}}">Update</button></td>
+			<td><button class = "DeleteTopping" pk="{{name}}">Delete</button></td>
 
                   </tr>
             {{/each}}
@@ -34,6 +35,7 @@
 			<td><button id = "UpdateFirst">Update</button></td>
                 </tr>
             </table>
+            <div id="error_top"></div>
           </div>
         {{/with}}
         {{#with objects.[1]}}
@@ -47,22 +49,23 @@
               </tr>
               {{#each restaurant}}
                   <tr>
-                      <td><input type="text" name="RName" placeholder="{{rest_name}}"></input></td>
-                      <td><input type="text" name="Address" placeholder="{{Address}}"></input></td>
-                      <td><input type="text" name="Zipcode" placeholder="{{Zipcode}}"></input></td>
-                      <td><input type="text" name="PhoneNumber" placeholder="{{PhoneNumber}}"></input></td>
-			                <td><button class = "UpdateTopping">Update</button></td>
-                      <td><button class = "DeleteTopping">Delete</button></td>
+                      <td><input type="text" name="RName" value="{{rest_name}}"></input></td>
+                      <td><input type="text" name="Address" value="{{Address}}"></input></td>
+                      <td><input type="text" name="Zipcode" value="{{Zipcode}}"></input></td>
+                      <td><input type="text" name="PhoneNumber" value="{{PhoneNumber}}"></input></td>
+			                <td><button class = "UpdateRestaurant" pk={{RestaurantID}}>Update</button></td>
+                      <td><button class = "DeleteRestaurant" pk={{RestaurantID}}>Delete</button></td>
                   </tr>
             {{/each}}
 		<tr>
-                    <td><input type="text" name="RName" placeholder="Insert Topping Name"></input></td>
+                    <td><input type="text" name="RName" placeholder="Insert Restaurant Name"></input></td>
                     <td><input type="text" name="Address" placeholder="Insert Address"></input></td>
                     <td><input type="text" name="Address" placeholder="Insert Zipcode"></input></td>
                     <td><input type="text" name="Address" placeholder="Insert Phone #"></input></td>
                 	<td><button id = "UpdateSecond">Update</button></td>
 		</tr>
             </table>
+            <div id="error_rest"></div>
           </div>
         {{/with}}
         {{#with objects.[2]}}
@@ -77,11 +80,11 @@
               {{#each pizza}}
                   <tr>
                       <td><a href="/pizzas/{{pizzaID}}">{{name}}</a></td>
-                      <td><input type="text" name="PizzaName" placeholder="{{name}}"></input></td>
-                      <td><input type="text" name="CrustType" placeholder="{{CrustType}}"></input></td>
-                      <td><input type="text" name="Size" placeholder="{{Size}}"></input></td>
-                			<td><button class = "UpdateTopping">Update</button></td>
-                      <td><button class = "DeleteTopping">Delete</button></td>
+                      <td><input type="text" name="PizzaName" value="{{name}}"></input></td>
+                      <td><input type="text" name="CrustType" value="{{CrustType}}"></input></td>
+                      <td><input type="text" name="Size" value="{{Size}}"></input></td>
+                			<td><button class = "UpdatePizza" pk={{pizzaID}}>Update</button></td>
+                      <td><button class = "DeletePizza" pk={{pizzaID}}>Delete</button></td>
                   </tr>
             {{/each}}
 		<tr>
@@ -92,9 +95,14 @@
                 	<td><button id = "UpdateThird">Update</button></td>
 		</tr>
             </table>
+            <div id="error_pizza"></div>
           </div>
         {{/with}}
     {{/with}}
   </div>
 </div>
 <footer>Created for CS340 class</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="/scripts/catalog.js"></script>
+
