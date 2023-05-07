@@ -26,7 +26,7 @@
     "jQuery": "^1.7.4",
     "md5": "^2.2.1",
     "mysql": "^2.17.1",
-    "nodemon": "^2.0.1"
+    "nodemon": "^2.0.22"
   },
   "devDependencies": {
     "forever": "^1.0.0"
